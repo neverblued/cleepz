@@ -48,7 +48,7 @@
 (defgeneric fetch-clip (template-with-clips clip-name &optional clip-args))
 
 (defmethod fetch-clip ((template template-with-clips) clip-name &optional clip-args)
-  (first (sort (remove clip-name (clips template)
+  (first (sort (remove clip-name (template-clips template)
                        :key #'clip-name
                        :test-not #'eql)
                #'< :key (lambda (clip)
