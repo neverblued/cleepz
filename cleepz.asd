@@ -12,12 +12,10 @@
   :version "0.1"
   :author "Demetrius Conde <condemetrius@gmail.com>"
   :licence "Public Domain"
-  :depends-on (#:dc-bin #:cl-ppcre)
+  :depends-on (#:dc-bin #:cl-ppcre #:alexandria)
   :serial t
   :components ((:file "cleepz-package")
-               (:file "cleepz-core")
-               (:file "cleepz-basic")
-               (:file "cleepz-clips")
-               (:file "cleepz-list")
-               (:file "cleepz-menu")
-               (:file "cleepz-sugar")))
+               (:file "cleepz-syntax")
+               (:file "cleepz-model")
+               (:file "cleepz-build")
+               (:file "cleepz-parse")))

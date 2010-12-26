@@ -18,11 +18,14 @@
                     )
                   :single-line-mode t))
 
-;; {0y0} The comments are visible only to the owl. {-y-}
+;; {-y-} While the reader owl sleeps, all content is missed. {0y0}
 
-(defparameter *comment-regex*
-  (create-scanner '(:sequence "{0y0}"
-                    (:non-greedy-repetition 0 nil :everything)
-                    "{-y-}"
-                    )
-                  :single-line-mode t))
+(defparameter *comment-begin* "{-y-}")
+(defparameter *comment-end*   "{0y0}")
+(define-symbol-macro *comment-regex*
+    (create-scanner `(:sequence
+                      ,*comment-begin*
+                      (:non-greedy-repetition 0 nil :everything)
+                      ,*comment-end*
+                      )
+                    :single-line-mode t))
