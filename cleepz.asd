@@ -14,8 +14,9 @@
   :licence "Public Domain"
   :depends-on (#:dc-bin #:cl-ppcre #:alexandria)
   :serial t
-  :components ((:file "cleepz-package")
-               (:file "cleepz-syntax")
-               (:file "cleepz-model")
-               (:file "cleepz-build")
-               (:file "cleepz-parse")))
+  :components ((:file "package")
+               (:file "syntax")
+               (:file "model")
+               (:file "data")
+               (:file "build")
+               (:file "parse")))
