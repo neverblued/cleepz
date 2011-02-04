@@ -1,16 +1,22 @@
-{0y0} Проверка шаблонизатора {-y-} {*y*}
+<!--: Проверка шаблонизатора :-->
+-:-
 <h1>Цвета с подсветкой via CLeep<sup>z</sup></h1>
-{0y(list :source cleepz-test::colors :item :color)}
-	(eql (getf cleepz::request :clip) :item)
-		8<
-{*y*}		<span style="color: {^y(data :source (getf (cleepz::template-datum :color) :rgb))}">
-{*y*}			{^y(data :source (getf (cleepz::template-datum :color) :name))}
-{*y*}		</span>
-{*y*}	>8
-	(eql (getf cleepz::request :clip) :separator)
-		8<, >8
-	(and (eql (getf cleepz::request :clip) :separator)
-		 (= (getf cleepz::request :iterator)
-		    (- (length cleepz-test::colors) 1)))
-		8< и наконец >8
-{-y(list)}
+<? list :source colors :item color ?>
+	<: (eql clip-purpose :item) :>
+-:-		<span style="color: <? data :source (getf color :rgb) /?>">
+-:-			<? data :source (getf color :name) /?>
+-:-		</span>
+-:-		&nbsp;
+-:-		<i>
+-:-			<? switch :source counter ?>
+				<: (evenp mediator)	:> чёт <:/:>
+				<: (oddp mediator)	:> нечет <:/:>
+			<? /switch ?>
+-:-		</i>
+-:-
+	<:/:>
+	<: (and (eql clip-purpose :separator)
+		 (= counter
+		    (- (length source) 1)))	 :> и наконец <:/:>
+	<: (eql clip-purpose :separator) :>, <:/:>
+<? /list ?>

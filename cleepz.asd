@@ -19,4 +19,5 @@
                (:file "model")
                (:file "data")
                (:file "build")
-               (:file "parse")))
+               (:file "parse")
+               (:file "slot")))

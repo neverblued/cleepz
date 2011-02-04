@@ -13,4 +13,5 @@
   (merge-pathnames "lisp/cleepz/test.clt" (user-homedir-pathname)))
 
 (defun run ()
-  (cleepz::parse-file template-pathname))
+  (with-datum 'colors colors
+    (parse-view-file template-pathname)))

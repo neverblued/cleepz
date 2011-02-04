@@ -1,51 +1,40 @@
 (in-package #:cleepz)
 
 (defmacro define-parser (name &rest sequence)
-  `(defparameter ,(symb "*" (string-upcase name) "-REGEX*")
-     (create-scanner '(:sequence ,@sequence) :single-line-mode t)))
+  (let ((var (symb "*" (string-upcase name) "-REGEX*"))
+        (scanner `(create-scanner '(:sequence ,@sequence) :single-line-mode t)))
+    `(progn (defparameter ,var ,scanner))))
 
-;; 12{0y0} Whoo? {-y-}34 => 1234
+;; 12<!--: OH SHI~ :-->34 => 1234
 
 (define-parser comment
-    "{0y0}" (:non-greedy-repetition 0 nil :everything) "{-y-}"
-    )
+    "<!--:" (:non-greedy-repetition 0 nil :everything) ":-->")
 
-;; 12 {*y*}  34 => 1234
+;; 12 -:-  34 => 1234
 
 (define-parser space
     (:greedy-repetition 0 nil :whitespace-char-class)
-    "{*y*}"
-    (:greedy-repetition 0 nil :whitespace-char-class)
-    )
+    "-:-"
+    (:greedy-repetition 0 nil :whitespace-char-class))
 
-;; {^y(data :source some-package::printable-data)}
+;; <? data :source some-package::printable-data /?>
 
 (define-parser simple
-    "{^y(" (:register (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) ")}"
-    )
+    "<? " (:register (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) " /?>")
 
-;; {0y(list :source some-package::list-data :item :my-item)} clips* {-y(list)}
+;; <? list :source some-package::list-data :item my-item ?> clips* <? /list ?>
 
 (define-parser complex
-    "{0y(" (:register (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) ")}"
+    "<? " (:named-register "view-class" (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) " ?>"
     (:register (:non-greedy-repetition 0 nil :everything))
-    "{-y(" (:back-reference 1) ")}"
-    )
+    "<? /" (:back-reference "view-class") " ?>")
 
 ;; * clips:
-;;    (= (getf request :clip) :item)
-;;      8< {^y(data :source (cleepz::template-datum :my-item))} >8
-;;    (and (eql (getf request :clip) :separator)
-;;         (= (getf request :iterator)
-;;            (length some-package::list-data)))
-;;      8< , and also  >8
+;;    <: (eql view-data::clip-purpose :item)                           :> <? data :source view-data::my-item ?>
+;;    <: (and (eql view-data::clip-purpose :separator)
+;;            (= view-data::counter (length some-package::list-data))) :> , and also
 
 (define-parser clip
-    (:register (:sequence "(" (:non-greedy-repetition 0 nil :everything) ")"))
-    (:regex "\\s*")
-    "8<"
-    ;(:regex "\\s?")
+    "<:" (:regex "\\s+") (:register (:sequence "(" (:non-greedy-repetition 0 nil :everything) ")")) (:regex "\\s+") ":>"
     (:register (:non-greedy-repetition 0 nil :everything))
-    ;(:regex "\\s?")
-    ">8"
-    )
+    "<:/:>")
