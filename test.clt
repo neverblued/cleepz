@@ -1,22 +1,24 @@
 <!--: Проверка шаблонизатора :-->
 -:-
 <h1>Цвета с подсветкой via CLeep<sup>z</sup></h1>
-<? list :source colors :item color ?>
+<? colors list
+		  :source colors
+		  :item color ?>
 	<: (eql clip-purpose :item) :>
 -:-		<span style="color: <? data :source (getf color :rgb) /?>">
 -:-			<? data :source (getf color :name) /?>
 -:-		</span>
 -:-		&nbsp;
 -:-		<i>
--:-			<? switch :source counter ?>
+-:-			<? parity switch
+					  :source counter ?>
 				<: (evenp mediator)	:> чёт <:/:>
 				<: (oddp mediator)	:> нечет <:/:>
-			<? /switch ?>
+			<? /parity ?>
 -:-		</i>
 -:-
 	<:/:>
 	<: (and (eql clip-purpose :separator)
-		 (= counter
-		    (- (length source) 1)))	 :> и наконец <:/:>
-	<: (eql clip-purpose :separator) :>, <:/:>
-<? /list ?>
+			(= counter (- (length source) 1))) :> и наконец <:/:>
+	<: (eql clip-purpose :separator)           :>, <:/:>
+<? /colors ?>

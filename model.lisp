@@ -5,6 +5,10 @@
 (defclass view ()
   ())
 
+(defgeneric build-view (view))
+
+(defgeneric build-view-failure (view condition))
+
 ;; simple view
 
 (defclass simple-view (view)
@@ -44,9 +48,7 @@
   (let ((clip (find-if (lambda (clip)
                          (funcall (clip-clause clip)))
                        (view-clips view))))
-    (if clip
-        (clip-markup clip)
-        "")))
+    (if clip (clip-markup clip) "")))
 
 ;; complex data view
 

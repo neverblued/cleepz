@@ -22,12 +22,18 @@
 (define-parser simple
     "<? " (:register (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) " /?>")
 
-;; <? list :source some-package::list-data :item my-item ?> clips* <? /list ?>
+;; <? example-view list
+;;                 :source some-package::list-data
+;;                 :item my-item ?>
+;;       clips*
+;; <? /example-view ?>
 
 (define-parser complex
-    "<? " (:named-register "view-class" (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) " ?>"
+    "<? " (:named-register "view-name" (:regex "[\\w\\-]+")) (:regex "\\s+")
+          (:named-register "view-class" (:regex "\\w+")) (:regex "\\s+")
+          (:register (:non-greedy-repetition 0 nil :everything)) " ?>"
     (:register (:non-greedy-repetition 0 nil :everything))
-    "<? /" (:back-reference "view-class") " ?>")
+    "<? /" (:back-reference "view-name") " ?>")
 
 ;; * clips:
 ;;    <: (eql view-data::clip-purpose :item)                           :> <? data :source view-data::my-item ?>

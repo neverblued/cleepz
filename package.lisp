@@ -1,3 +1,3 @@
 (defpackage #:cleepz
   (:use #:cl #:bin #:cl-ppcre #:alexandria)
-  (:export #:datum #:with-datum #:with-data #:clip-tag #:parse-view-string #:parse-view-file))
+  (:export #:with-datum #:with-data #:parse-view-string #:parse-view-file))

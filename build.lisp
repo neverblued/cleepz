@@ -1,14 +1,21 @@
 (in-package #:cleepz)
 
-(defgeneric build-view (view))
+;; anything
+
+(defmethod build-view (view)
+  (format nil "[? ~a ?]" (type-of view)))
+
+;; view
 
 (defmethod build-view :around (view)
   (handler-case (call-next-method)
     (condition (condition)
-      (build-view (make-warning-view (format nil "~a build failure: ~s~:* \"~a\"" view condition))))))
+      (build-view-failure view condition))))
 
-(defmethod build-view (view)
-  (format nil "[? ~a ?]" (type-of view)))
+(defmethod build-view-failure (view condition)
+  (error "~a failed with ~a" view condition))
+
+;; types
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))
