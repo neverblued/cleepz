@@ -6,4 +6,4 @@
       (apply #'mutate markup *slot-processors*)))
 
 (defun parse-view-file (path)
-  (parse-view-string (string<-pathname path)))
+  (parse-view-string (pathname-content path)))

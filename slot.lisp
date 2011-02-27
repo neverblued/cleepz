@@ -39,10 +39,12 @@
              (nconc *slot-processors*
                     (list #',processor-name*))))))
 
+;; parse order
+
 (define-slot complex name type args clips)
 
 (define-slot simple type args)
 
-(define-slot comment)
+(define-slot reduce)
 
-(define-slot space)
+(define-slot comment)

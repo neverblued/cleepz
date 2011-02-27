@@ -1,9 +1,5 @@
 (defpackage #:cleepz-system
-  (:use
-     #:common-lisp
-     #:asdf
-     )
-  )
+  (:use #:common-lisp #:asdf))
 
 (in-package #:cleepz-system)
 
@@ -11,8 +7,7 @@
   :description "Template framework"
   :version "0.1"
   :author "Demetrius Conde <condemetrius@gmail.com>"
-  :licence "Public Domain"
-  :depends-on (#:dc-bin #:cl-ppcre #:alexandria)
+  :depends-on (#:cl-blackjack #:cl-ppcre #:alexandria)
   :serial t
   :components ((:file "package")
                (:file "syntax")

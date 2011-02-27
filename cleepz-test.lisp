@@ -10,8 +10,11 @@
         (list :name "skin"  :rgb "#face8D")))
 
 (defparameter template-pathname
-  (merge-pathnames "lisp/cleepz/test.clt" (user-homedir-pathname)))
+  (merge-pathnames "lisp/cleepz/test.clt" (user-homedir-pathname))) ; how to make it portable?
 
 (defun run ()
+  "Run test."
   (with-datum 'colors colors
     (parse-view-file template-pathname)))
+
+;(run)

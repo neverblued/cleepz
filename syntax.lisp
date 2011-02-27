@@ -5,17 +5,17 @@
         (scanner `(create-scanner '(:sequence ,@sequence) :single-line-mode t)))
     `(progn (defparameter ,var ,scanner))))
 
+;; 12 -:-  34 => 1234
+
+(define-parser reduce
+    (:greedy-repetition 0 nil :whitespace-char-class)
+    "-:-"
+    (:greedy-repetition 0 nil :whitespace-char-class))
+
 ;; 12<!--: OH SHI~ :-->34 => 1234
 
 (define-parser comment
     "<!--:" (:non-greedy-repetition 0 nil :everything) ":-->")
-
-;; 12 -:-  34 => 1234
-
-(define-parser space
-    (:greedy-repetition 0 nil :whitespace-char-class)
-    "-:-"
-    (:greedy-repetition 0 nil :whitespace-char-class))
 
 ;; <? data :source some-package::printable-data /?>
 

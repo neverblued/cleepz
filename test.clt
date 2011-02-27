@@ -16,8 +16,7 @@
 				<: (oddp mediator)	:> нечет <:/:>
 			<? /parity ?>
 -:-		</i>
--:-
-	<:/:>
+-:-	<:/:>
 	<: (and (eql clip-purpose :separator)
 			(= counter (- (length source) 1))) :> и наконец <:/:>
 	<: (eql clip-purpose :separator)           :>, <:/:>
