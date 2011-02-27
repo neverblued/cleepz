@@ -13,9 +13,12 @@
       (build-view-failure view condition))))
 
 (defmethod build-view-failure (view condition)
-  (error "~a failed with ~a" view condition))
+  (error "~a (via ~a)" condition view))
 
 ;; types
+
+(defmethod build-view ((view include-view))
+  (parse-view-file (eval (include-view-path view))))
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))

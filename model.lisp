@@ -14,6 +14,13 @@
 (defclass simple-view (view)
   ())
 
+;; include
+
+(defgeneric include-view-path (include-view))
+
+(defclass include-view (simple-view)
+  ((path :initarg :path :accessor include-view-path)))
+
 ;; data view
 
 (defgeneric view-source (data-view))
