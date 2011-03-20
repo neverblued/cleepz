@@ -7,7 +7,7 @@
   :description "Template framework"
   :version "0.1"
   :author "Demetrius Conde <condemetrius@gmail.com>"
-  :depends-on (#:cl-blackjack #:cl-ppcre #:alexandria)
+  :depends-on (#:blackjack #:cl-ppcre #:alexandria)
   :serial t
   :components ((:file "package")
                (:file "syntax")
