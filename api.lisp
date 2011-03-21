@@ -1,3 +1,7 @@
+;; (c) Demetrius Conde <condemetrius@gmail.com>
+;; Допускаю использование и распространение согласно
+;; LLGPL --> http://opensource.franz.com/preamble.html
+
 (in-package #:cleepz)
 
 (defun parse-view-string (markup)

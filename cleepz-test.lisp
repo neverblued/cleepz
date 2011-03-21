@@ -1,3 +1,7 @@
+;; (c) Demetrius Conde <condemetrius@gmail.com>
+;; Допускаю использование и распространение согласно
+;; LLGPL --> http://opensource.franz.com/preamble.html
+
 (defpackage #:cleepz-test
   (:use #:cl #:cleepz))
 

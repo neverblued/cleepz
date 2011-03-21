@@ -1,5 +1,7 @@
-<!--: Проверка шаблонизатора :-->
--:-
+<!--: (c) Demetrius Conde <condemetrius@gmail.com>
+	  Допускаю использование и распространение согласно
+      LLGPL --> http://opensource.franz.com/preamble.html :-->
+							-:-
 <h1>Цвета с подсветкой via CLeep<sup>z</sup></h1>
 <? colors list
 		  :source colors
