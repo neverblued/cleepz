@@ -45,6 +45,6 @@
 ;;            (= view-data::counter (length some-package::list-data))) :> , and also
 
 (define-parser clip
-    "<:" (:regex "\\s+") (:register (:sequence "(" (:non-greedy-repetition 0 nil :everything) ")")) (:regex "\\s+") ":>"
+    "<:" (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) (:regex "\\s+") ":>"
     (:register (:non-greedy-repetition 0 nil :everything))
     "<:/:>")
