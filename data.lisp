@@ -8,7 +8,7 @@
   (:use #:cl))
 
 (defmacro isset (var-name)
-  `(true? (find-symbol (symbol-name ',var-name) :view-data)))
+  `(boundp (find-symbol (symbol-name ',var-name) :view-data)))
 
 (import 'isset :view-data)
 
