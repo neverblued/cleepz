@@ -7,6 +7,11 @@
 (defpackage #:view-data
   (:use #:cl))
 
+(defmacro isset (var-name)
+  `(true? (find-symbol (symbol-name ',var-name) :view-data)))
+
+(import 'isset :view-data)
+
 (defun datum-symbol (any-symbol &optional (intern t))
   (funcall (if intern #'intern #'find-symbol)
            (symbol-name any-symbol)
