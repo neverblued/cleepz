@@ -1,6 +1,6 @@
-;; (c) Demetrius Conde <condemetrius@gmail.com>
+;; (c) Дмитрий Пинский <demetrius@neverblued.info>
 ;; Допускаю использование и распространение согласно
-;; LLGPL --> http://opensource.franz.com/preamble.html
+;; LLGPL -> http://opensource.franz.com/preamble.html
 
 (defpackage #:cleepz-test
   (:use #:cl #:cleepz))
@@ -13,6 +13,6 @@
                             (list :name "green" :rgb "#0f0")
                             (list :name "blue"  :rgb "#00f")
                             (list :name "skin"  :rgb "#face8D"))
-    (parse-view-file (merge-pathnames "lisp/cleepz/test.html" (user-homedir-pathname))))) ; how to make it portable?
+    (parse-view-file "/home/lisp/project/cleepz/test.html"))) ; how to make it portable?
 
 ;(run)

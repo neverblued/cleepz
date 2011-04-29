@@ -1,31 +1,31 @@
-<!--: (c) Demetrius Conde <condemetrius@gmail.com>
-	  Допускаю использование и распространение согласно
-      LLGPL --> http://opensource.franz.com/preamble.html :-->
+<!--: (c) Дмитрий Пинский <demetrius@neverblued.info>
+      Допускаю использование и распространение согласно
+      LLGPL -> http://opensource.franz.com/preamble.html :-->
 							-:-
-<h1>Цвета с подсветкой via CLeep<sup>z</sup></h1>
+<h1>Цвета с подсветкой via CLeep<sup>z</sup></h1> -:-
 <? colors list
-		  :source colors
-		  :item color ?>
-	<: (eql clip-purpose :item) :>
--:-		<span style="color: <? data :source (getf color :rgb) /?>">
--:-			<? data :source (getf color :name) /?>
--:-		</span>
--:-		<!--::--> <!--:
-			1. Первыми срабатывают склейки;
-			2. Между комментариями остаётся пробел;
-			3. Тексты в соседних тегах не склеиваются;
-			4. ???????
-			5. PROFIT
-		:-->
--:-		<i>
--:-			<? parity switch
-					  :source counter ?>
-				<: (evenp mediator)	:> чёт <:/:>
-				<: t 				:> нечет <:/:>
-			<? /parity ?>
--:-		</i>
--:-	<:/:>
-	<: (and (eql clip-purpose :separator)
-			(= counter (- (length source) 1))) :> и наконец <:/:>
-	<: (eql clip-purpose :separator)           :>, <:/:>
-<? /colors ?>
+          :source colors
+          :item color ?>
+	<: (eql clip-purpose :item) :> -:-
+        <span style="color: <? data :source (getf color :rgb) /?>"> -:-
+            <? data :source (getf color :name) /?> -:-
+        </span> -:-
+        <!--::--> <!--:
+            1. Первыми срабатывают склейки;
+            2. Между комментариями остаётся пробел;
+            3. Тексты в соседних тегах не склеиваются;
+            4. ???????
+            5. PROFIT
+        :--> -:-
+        <i> -:-
+            <? parity switch
+                      :source counter ?>
+                <: (evenp mediator)	:> чёт <:/:>
+                <: t 				:> нечет <:/:>
+            <? /parity ?> -:-
+        </i> -:-
+    <:/:>
+    <: (and (eql clip-purpose :separator)
+            (= counter (- (length source) 1))) :> и наконец <:/:>
+    <: (eql clip-purpose :separator)           :>, <:/:>
+<? /colors ?>.
