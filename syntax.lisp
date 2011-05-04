@@ -24,7 +24,12 @@
 ;; <? data :source some-package::printable-data /?>
 
 (define-parser simple
-    "<? " (:register (:regex "\\w+")) (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) " /?>")
+    "<?" (:regex "\\s*")
+         (:register (:regex "\\w+"))
+         (:regex "\\s+")
+         (:register (:non-greedy-repetition 0 nil :everything))
+         (:regex "\\s*")
+         "/?>")
 
 ;; <? example-view list
 ;;                 :source some-package::list-data
@@ -33,11 +38,15 @@
 ;; <? /example-view ?>
 
 (define-parser complex
-    "<? " (:named-register "view-name" (:regex "[\\w\\-]+")) (:regex "\\s+")
-          (:named-register "view-class" (:regex "\\w+")) (:regex "\\s+")
-          (:register (:non-greedy-repetition 0 nil :everything)) " ?>"
+    "<?" (:regex "\\s*")
+         (:named-register "view-name" (:regex "[\\w\\-]+"))
+         (:regex "\\s+")
+         (:named-register "view-class" (:regex "\\w+"))
+         (:regex "\\s+")
+         (:register (:non-greedy-repetition 0 nil :everything)) (:regex "\\s*")
+         "?>"
     (:register (:non-greedy-repetition 0 nil :everything))
-    "<? /" (:back-reference "view-name") " ?>")
+    "<?" (:regex "\\s*") "/" (:back-reference "view-name") (:regex "\\s*") "?>")
 
 ;; * clips:
 ;;    <: (eql view-data::clip-purpose :item)                           :> <? data :source view-data::my-item ?>

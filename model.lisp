@@ -23,14 +23,15 @@
 (defgeneric include-view-path (include-view))
 
 (defclass include-view (simple-view)
-  ((path :initarg :path :accessor include-view-path)))
+  ((path :initarg :path :accessor include-view-path)
+   (site :initarg :site :accessor include-view-site :initform nil)))
 
 ;; data view
 
 (defgeneric view-source (data-view))
 
 (defclass data-view (simple-view)
-  ((source :initarg :source :accessor view-source)))
+  ((source :initarg :source :accessor view-source :initform nil)))
 
 (defmethod view-source ((view data-view))
   (eval (slot-value view 'source)))

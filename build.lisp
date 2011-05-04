@@ -22,7 +22,12 @@
 ;; types
 
 (defmethod build-view ((view include-view))
-  (parse-view-file (eval (include-view-path view))))
+  (let ((path (eval (include-view-path view))))
+    (parse-view-file (aif (include-view-site view)
+                          (if (find-package :wsf)
+                              (wsf:from-docroot (eval it) path)
+                              (error "Need WSF package for using SITE."))
+                          path))))
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))

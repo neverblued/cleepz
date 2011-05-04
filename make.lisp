@@ -5,7 +5,7 @@
 (in-package #:cleepz)
 
 (defun make-error-view (message)
-  (make-instance 'format-view :pattern "<!-- NB! ~a -->" :source message))
+  (make-instance 'format-view :pattern "<!--= ~a =-->" :source message))
 
 (defun make-simple-view (class args)
   (if (subtypep class 'simple-view)
