@@ -24,9 +24,10 @@
 (defmethod build-view ((view include-view))
   (let ((path (eval (include-view-path view))))
     (parse-view-file (aif (include-view-site view)
-                          (if (find-package :wsf)
-                              (wsf:from-docroot (eval it) path)
-                              (error "Need WSF package for using SITE."))
+                          (let ((wsf (find-package :wsf)))
+                            (if wsf
+                                (funcall (symbol-function (find-symbol "FROM-DOCROOT" wsf)) (eval it) path)
+                                (error "Need WSF package for using SITE.")))
                           path))))
 
 (defmethod build-view ((view data-view))
