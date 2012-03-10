@@ -15,8 +15,8 @@
 (defun make-complex-view (name class args clips)
   (declare (ignore name))
   (if (subtypep class 'complex-view)
-      (alter (apply #'make-instance class args)
-             (setf (view-clips altered) clips))
+      (aprogn (apply #'make-instance class args)
+              (setf (view-clips it) clips))
       (error "~a is not a COMPLEX-VIEW." class)))
 
 (defun make-view-clip (clause markup)

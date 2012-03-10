@@ -11,6 +11,6 @@
   :description "Template framework test"
   :version "0.1"
   :author "Demetrius Conde <condemetrius@gmail.com>"
-  :depends-on (#:cleepz)
+  :depends-on (#:blackjack #:cleepz)
   :serial t
   :components ((:file "cleepz-test")))

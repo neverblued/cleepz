@@ -5,9 +5,8 @@
                             -:-
                             
 <h1>Цвета с подсветкой via CLeep<sup>z</sup></h1> -:-
-<? colors list
-          :source colors
-          :item color ?>
+
+<? colors list :source colors :item color ?>
           
 	<: (eql clip-purpose :item) :> -:-
         <span style="color: <? data :source (getf color :rgb) /?>"> -:-
@@ -21,8 +20,7 @@
             5. PROFIT
         :--> -:-
         <i> -:-
-            <? parity switch
-                      :source counter ?>
+            <? parity switch :source counter ?>
                 <: (evenp mediator) :> чёт <:/:>
                 <: t                :> нечет <:/:>
             <? /parity ?> -:-
@@ -30,7 +28,7 @@
     <:/:>
     
     <: (and (eql clip-purpose :separator)
-            (= counter (- (length source) 1))) :> и наконец <:/:>
+            (= counter (1- (length source)))) :> и наконец <:/:>
             
     <: (eql clip-purpose :separator)           :>, <:/:>
     
