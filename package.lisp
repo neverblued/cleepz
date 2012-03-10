@@ -3,5 +3,7 @@
 ;; LLGPL -> http://opensource.franz.com/preamble.html
 
 (defpackage #:cleepz
-  (:use #:cl #:bj #:ppcre #:alexandria)
-  (:export #:with-datum #:with-data #:parse-view-string #:parse-view-file))
+  (:use #:cl #:bj #:ppcre #:alexandria #:iterate)
+  (:export #:with-view-datum #:with-view-data
+           #:with-view-docroot
+           #:parse-view-string #:parse-view-file))

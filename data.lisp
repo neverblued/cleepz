@@ -17,15 +17,29 @@
            (symbol-name any-symbol)
            (find-package :view-data)))
 
-(defmacro with-datum (symbol value &body body)
+(defmacro with-view-datum (symbol value &body body)
   `(progv
        (list (datum-symbol ,symbol))
        (list ,value)
      ,@body))
 
-(defmacro with-data ((&rest let-forms) &body body)
-  (let ((let-forms (group let-forms 2)))
+(defmacro with-view-data ((&rest let-alist) &body body)
+  (let ((let-forms (group let-alist 2)))
     `(progv
          (mapcar #'datum-symbol (list ,@(mapcar #'car let-forms)))
          (list ,@(mapcar #'cadr let-forms))
        ,@body)))
+
+(defmacro with-view-data-alist ((&rest let-alist) &rest body)
+  (with-gensyms (scope)
+    `(let ((,scope (group ,let-alist 2)))
+       (progv
+           (mapcar #'datum-symbol (mapcar #'car ,scope))
+           (mapcar #'cadr ,scope)
+         ,@body))))
+
+(defvar view-docroot)
+
+(defmacro with-view-docroot (path &body body)
+  `(let ((cleepz::view-docroot ,path))
+     ,@body))

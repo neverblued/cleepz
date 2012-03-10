@@ -9,9 +9,9 @@
 
 (defsystem "cleepz"
   :description "Template framework"
-  :version "0.1"
+  :version "0.2"
   :author "Demetrius Conde <condemetrius@gmail.com>"
-  :depends-on (#:blackjack #:cl-ppcre #:alexandria)
+  :depends-on (#:blackjack #:cl-ppcre #:alexandria #:iterate)
   :serial t
   :components ((:file "package")
                (:file "syntax")

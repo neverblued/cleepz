@@ -22,13 +22,17 @@
 ;; types
 
 (defmethod build-view ((view include-view))
-  (let ((path (eval (include-view-path view))))
-    (parse-view-file (aif (include-view-site view)
-                          (let ((wsf (find-package :wsf)))
-                            (if wsf
-                                (funcall (symbol-function (find-symbol "FROM-DOCROOT" wsf)) (eval it) path)
-                                (error "Need WSF package for using SITE.")))
-                          path))))
+  (let ((path (awith (eval (include-view-path view))
+                (if (boundp 'view-docroot)
+                    (join view-docroot "/" it)
+                    it))))
+    (with-view-data-alist (eval `(list ,@(include-view-scope view)))
+      (parse-view-file (aif (include-view-site view)
+                            (let ((wsf (find-package :wsf)))
+                              (if wsf
+                                  (funcall (symbol-function (find-symbol "FROM-DOCROOT" wsf)) (eval it) path)
+                                  (error "Need WSF package for using SITE.")))
+                            path)))))
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))
@@ -37,11 +41,11 @@
   (format nil (view-pattern view) (view-source view)))
 
 (defmethod build-view :around ((view complex-view))
-  (with-datum 'this view
+  (with-view-datum 'this view
     (call-next-method)))
 
 (defmethod build-view :around ((view complex-data-view))
-  (with-datum 'source (view-source view)
+  (with-view-datum 'source (view-source view)
     (call-next-method)))
 
 (defmethod build-view ((view list-view))
@@ -52,14 +56,19 @@
                (clip-paste ()
                  `(push (parse-view-string (clip view)) pastry)))
       (join-pastry (item-value (view-source view))
+        (when (zerop counter)
+          (with-view-datum 'clip-purpose :header
+            (clip-paste)))
         (incf counter)
-        (with-datum (list-view-counter-symbol view) counter
-          (with-data ('clip-purpose :item (list-view-item-symbol view) item-value)
+        (with-view-datum (list-view-counter-symbol view) counter
+          (with-view-data ('clip-purpose :item (list-view-item-symbol view) item-value)
             (clip-paste))
-          (when (< counter (length (view-source view)))
-            (with-datum 'clip-purpose :separator
-              (clip-paste))))))))
+          (if (< counter (length (view-source view)))
+              (with-view-datum 'clip-purpose :separator
+                (clip-paste))
+              (with-view-datum 'clip-purpose :footer
+                (clip-paste))))))))
 
 (defmethod build-view ((view switch-view))
-  (with-datum (switch-view-mediator-symbol view) (view-source view)
+  (with-view-datum (switch-view-mediator-symbol view) (view-source view)
     (parse-view-string (clip view))))

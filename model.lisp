@@ -24,7 +24,8 @@
 
 (defclass include-view (simple-view)
   ((path :initarg :path :accessor include-view-path)
-   (site :initarg :site :accessor include-view-site :initform nil)))
+   (site :initarg :site :accessor include-view-site :initform nil)
+   (scope :initarg :let :accessor include-view-scope :initform nil)))
 
 ;; data view
 
