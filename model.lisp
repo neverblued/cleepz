@@ -6,25 +6,23 @@
 
 ;; view
 
-(defclass view ()
-  ())
-
+(defclass view () ())
 (defgeneric build-view (view))
-
 (defgeneric build-view-failure (view condition))
 
 ;; simple view
 
-(defclass simple-view (view)
-  ())
+(defclass simple-view (view) ())
 
 ;; include
 
+(defvar view-docroot)
+
 (defgeneric include-view-path (include-view))
+(defgeneric include-view-scope (include-view))
 
 (defclass include-view (simple-view)
   ((path :initarg :path :accessor include-view-path)
-   (site :initarg :site :accessor include-view-site :initform nil)
    (scope :initarg :let :accessor include-view-scope :initform nil)))
 
 ;; data view
@@ -65,8 +63,7 @@
 
 ;; complex data view
 
-(defclass complex-data-view (complex-view data-view)
-  ())
+(defclass complex-data-view (complex-view data-view) ())
 
 ;; list view
 

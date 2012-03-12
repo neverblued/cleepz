@@ -9,7 +9,7 @@
 (defmethod build-view (view)
   (format nil "[? ~a ?]" (type-of view)))
 
-;; view
+;; basic
 
 (defmethod build-view :around (view)
   (handler-case (call-next-method)
@@ -19,20 +19,15 @@
 (defmethod build-view-failure (view condition)
   (error "~a (via ~a)" condition view))
 
-;; types
+;; other
 
 (defmethod build-view ((view include-view))
   (let ((path (awith (eval (include-view-path view))
-                (if (boundp 'view-docroot)
+                (if view-docroot
                     (join view-docroot "/" it)
                     it))))
     (with-view-data-alist (eval `(list ,@(include-view-scope view)))
-      (parse-view-file (aif (include-view-site view)
-                            (let ((wsf (find-package :wsf)))
-                              (if wsf
-                                  (funcall (symbol-function (find-symbol "FROM-DOCROOT" wsf)) (eval it) path)
-                                  (error "Need WSF package for using SITE.")))
-                            path)))))
+      (parse-view-file path))))
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))

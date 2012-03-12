@@ -5,5 +5,5 @@
 (defpackage #:cleepz
   (:use #:cl #:bj #:ppcre #:alexandria #:iterate)
   (:export #:with-view-datum #:with-view-data
-           #:with-view-docroot
+           #:view-docroot
            #:parse-view-string #:parse-view-file))

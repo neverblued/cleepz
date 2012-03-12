@@ -21,7 +21,7 @@
 (define-parser comment
     "<!--:" (:non-greedy-repetition 0 nil :everything) ":-->")
 
-;; <? data :source some-package::printable-data /?>
+;; <? data :source printable-data /?>
 
 (define-parser simple
     "<?" (:regex "\\s*")
@@ -31,11 +31,12 @@
          (:regex "\\s*")
          "/?>")
 
-;; <? example-view list
-;;                 :source some-package::list-data
-;;                 :item my-item ?>
-;;       clips*
-;; <? /example-view ?>
+;; <? digits list
+;;           :source (list 1 2 3 4 5)
+;;           :item digit
+;;           ?>
+;;   clips*
+;; <? /digits ?>
 
 (define-parser complex
     "<?" (:regex "\\s*")
@@ -48,10 +49,11 @@
     (:register (:non-greedy-repetition 0 nil :everything))
     "<?" (:regex "\\s*") "/" (:back-reference "view-name") (:regex "\\s*") "?>")
 
-;; * clips:
-;;    <: (eql view-data::clip-purpose :item)                           :> <? data :source view-data::my-item ?>
-;;    <: (and (eql view-data::clip-purpose :separator)
-;;            (= view-data::counter (length some-package::list-data))) :> , and also
+;; *clips:
+;;    <: (eql clip-purpose :item)               :><? data :source digit /?><:/:>
+;;    <: (and (eql clip-purpose :separator)
+;;            (= counter (1- (length source)))) :> and also <:/:>
+;;    <: (eql clip-purpose :separator)          :>, <:/:>
 
 (define-parser clip
     "<:" (:regex "\\s+") (:register (:non-greedy-repetition 0 nil :everything)) (:regex "\\s+") ":>"

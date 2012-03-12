@@ -37,9 +37,3 @@
            (mapcar #'datum-symbol (mapcar #'car ,scope))
            (mapcar #'cadr ,scope)
          ,@body))))
-
-(defvar view-docroot)
-
-(defmacro with-view-docroot (path &body body)
-  `(let ((cleepz::view-docroot ,path))
-     ,@body))
