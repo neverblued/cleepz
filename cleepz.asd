@@ -8,9 +8,10 @@
 (in-package #:cleepz-system)
 
 (defsystem "cleepz"
-  :description "Template framework"
+  :description "Templating framework"
   :version "0.2"
-  :author "Demetrius Conde <condemetrius@gmail.com>"
+  :author "Дмитрий Пинский <demetrius@neverblued.info>"
+  :licence "LLGPL"
   :depends-on (#:blackjack #:cl-ppcre #:alexandria #:iterate)
   :serial t
   :components ((:file "package")
