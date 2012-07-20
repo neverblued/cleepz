@@ -12,7 +12,7 @@
   :version "0.2"
   :author "Дмитрий Пинский <demetrius@neverblued.info>"
   :licence "LLGPL"
-  :depends-on (#:blackjack #:cl-ppcre #:alexandria #:iterate)
+  :depends-on (#:blackjack)
   :serial t
   :components ((:file "package")
                (:file "syntax")

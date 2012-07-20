@@ -6,24 +6,30 @@
 
 ;; view
 
-(defclass view () ())
 (defgeneric build-view (view))
 (defgeneric build-view-failure (view condition))
+
+(defclass view () ())
 
 ;; simple view
 
 (defclass simple-view (view) ())
+
+;; scope view
+
+(defgeneric view-scope (view))
+
+(defclass scope-view (view)
+  ((scope :initarg :let :accessor view-scope :initform nil)))
 
 ;; include
 
 (defvar view-docroot)
 
 (defgeneric include-view-path (include-view))
-(defgeneric include-view-scope (include-view))
 
-(defclass include-view (simple-view)
-  ((path :initarg :path :accessor include-view-path)
-   (scope :initarg :let :accessor include-view-scope :initform nil)))
+(defclass include-view (simple-view scope-view)
+  ((path :initarg :path :accessor include-view-path)))
 
 ;; data view
 
@@ -46,7 +52,7 @@
 
 (defgeneric view-clips (complex-view))
 
-(defclass complex-view (view)
+(defclass complex-view (scope-view)
   ((clips :initform nil :initarg :clips :accessor view-clips)))
 
 (defclass clip ()

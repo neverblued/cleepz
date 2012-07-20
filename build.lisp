@@ -4,12 +4,10 @@
 
 (in-package #:cleepz)
 
-;; anything
+;; basic
 
 (defmethod build-view (view)
   (format nil "[? ~a ?]" (type-of view)))
-
-;; basic
 
 (defmethod build-view :around (view)
   (handler-case (call-next-method)
@@ -19,21 +17,28 @@
 (defmethod build-view-failure (view condition)
   (error "~a (via ~a)" condition view))
 
-;; other
-
-(defmethod build-view ((view include-view))
-  (let ((path (awith (eval (include-view-path view))
-                (if view-docroot
-                    (join view-docroot "/" it)
-                    it))))
-    (with-view-data-alist (eval `(list ,@(include-view-scope view)))
-      (parse-view-file path))))
+;; simple
 
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))
 
 (defmethod build-view ((view format-view))
   (format nil (view-pattern view) (view-source view)))
+
+;; scope
+
+(defmethod build-view :around ((view scope-view))
+  (with-view-data-alist (eval `(list ,@(view-scope view)))
+    (call-next-method)))
+
+(defmethod build-view ((view include-view))
+  (let ((path (awith (eval (include-view-path view))
+                (if view-docroot
+                    (join view-docroot "/" it)
+                    it))))
+    (parse-view-file path)))
+
+;; complex
 
 (defmethod build-view :around ((view complex-view))
   (with-view-datum 'this view
