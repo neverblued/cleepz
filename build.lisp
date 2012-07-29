@@ -33,7 +33,7 @@
 
 (defmethod build-view ((view include-view))
   (let ((path (awith (eval (include-view-path view))
-                (if view-docroot
+                (if (boundp 'view-docroot)
                     (join view-docroot "/" it)
                     it))))
     (parse-view-file path)))
