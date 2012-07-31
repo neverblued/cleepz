@@ -35,7 +35,7 @@
 
 (defgeneric view-source (data-view))
 
-(defclass data-view (simple-view)
+(defclass data-view (scope-view simple-view)
   ((source :initarg :source :accessor view-source :initform nil)))
 
 (defmethod view-source ((view data-view))

@@ -13,9 +13,9 @@
 (import 'isset :view-data)
 
 (defun datum-symbol (any-symbol &optional (intern t))
-  (funcall (if intern #'intern #'find-symbol)
-           (symbol-name any-symbol)
-           (find-package :view-data)))
+  (let ((package (find-package :view-data)) ; *package*
+        (fetcher (if intern #'intern #'find-symbol)))
+    (funcall fetcher (symbol-name any-symbol) package)))
 
 (defmacro with-view-datum (symbol value &body body)
   `(progv

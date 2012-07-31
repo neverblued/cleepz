@@ -22,6 +22,10 @@
 (defmethod build-view ((view data-view))
   (format nil "~a" (view-source view)))
 
+(defmethod build-view :around ((view data-view))
+  (let ((*package* (find-package '#:view-data)))
+    (call-next-method)))
+
 (defmethod build-view ((view format-view))
   (format nil (view-pattern view) (view-source view)))
 
