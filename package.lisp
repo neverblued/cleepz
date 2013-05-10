@@ -4,6 +4,14 @@
 
 (defpackage #:cleepz
   (:use #:cl #:bj #:ppcre #:alexandria #:iterate)
-  (:export #:with-view-datum #:with-view-data
-           #:view-docroot
-           #:parse-view-string #:parse-view-file))
+  (:export
+                                        ; api
+   #:with-view-datum #:with-view-data
+   #:parse-view-string #:parse-view-file
+   #:view-home #:view/
+                                        ; view
+   #:view
+   #:simple-view #:scope-view
+   #:include-view #:data-view #:format-view
+   #:complex-view #:complex-data-view
+   #:list-view #:switch-view))

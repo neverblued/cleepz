@@ -19,6 +19,7 @@
                (:file "model")
                (:file "data")
                (:file "make")
+               (:file "home")
                (:file "build")
                (:file "parse")
                (:file "slot")

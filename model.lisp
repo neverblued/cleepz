@@ -24,8 +24,6 @@
 
 ;; include
 
-(defvar view-docroot)
-
 (defgeneric include-view-path (include-view))
 
 (defclass include-view (simple-view scope-view)

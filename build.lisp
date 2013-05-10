@@ -36,11 +36,7 @@
     (call-next-method)))
 
 (defmethod build-view ((view include-view))
-  (let ((path (awith (eval (include-view-path view))
-                (if (boundp 'view-docroot)
-                    (join view-docroot "/" it)
-                    it))))
-    (parse-view-file path)))
+  (view/ (eval (include-view-path view))))
 
 ;; complex
 
