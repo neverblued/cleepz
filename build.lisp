@@ -19,7 +19,7 @@
 
 ;; simple
 
-(defmethod build-view ((view data-view))
+(defmethod build-view ((view print-view))
   (format nil "~a" (view-source view)))
 
 (defmethod build-view :around ((view data-view))

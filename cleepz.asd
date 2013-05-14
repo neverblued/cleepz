@@ -8,10 +8,7 @@
 (in-package #:cleepz-system)
 
 (defsystem "cleepz"
-  :description "Templating framework"
-  :version "0.2"
-  :author "Дмитрий Пинский <demetrius@neverblued.info>"
-  :licence "LLGPL"
+  :version "0.3"
   :depends-on (#:blackjack)
   :serial t
   :components ((:file "package")

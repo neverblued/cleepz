@@ -8,9 +8,7 @@
 (in-package #:cleepz-system)
 
 (defsystem "cleepz-test"
-  :description "Template framework test"
-  :version "0.1"
-  :author "Demetrius Conde <condemetrius@gmail.com>"
-  :depends-on (#:blackjack #:cleepz)
+  :version "0.2"
+  :depends-on (#:cleepz)
   :serial t
-  :components ((:file "cleepz-test")))
+  :components ((:file "test")))

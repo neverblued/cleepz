@@ -17,6 +17,9 @@
              `(let ((*package* (find-package :view-data)))
                 (read-from-string ,form))))
 
+  (defun parse-view-value (value-template)
+    (read-with-data value-template))
+
   (defun parse-view-args (args-template)
     (read-with-data (join "(" args-template ")")))
 

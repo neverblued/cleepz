@@ -11,7 +11,7 @@
    #:view-home #:view/
                                         ; view
    #:view
-   #:simple-view #:scope-view
+   #:simple-view #:print-view #:scope-view
    #:include-view #:data-view #:format-view
    #:complex-view #:complex-data-view
    #:list-view #:switch-view))

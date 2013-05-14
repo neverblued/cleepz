@@ -5,7 +5,8 @@
 (in-package #:cleepz)
 
 (defmacro define-patcher (name slot (&rest parts) &body body)
-  (unless (find 'type parts)
+  (unless (or (eql slot 'print)
+	      (find 'type parts))
     (error "TYPE part is required to define a ~a slot." slot))
   (let ((make-view* (cleepz-symbol "make-" slot "-view"))
         (view-parts* (mapcar (lambda (part)
@@ -49,7 +50,7 @@
 
 (define-slot simple type args)
 
-;;(define-slot simple) ; @TODO refactor
+(define-slot print value)
 
 (define-slot reduce)
 

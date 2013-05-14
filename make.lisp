@@ -7,6 +7,9 @@
 (defun make-error-view (message)
   (make-instance 'format-view :pattern "<!--= ~a =-->" :source message))
 
+(defun make-print-view (value)
+  (make-instance 'print-view :source value))
+
 (defun make-simple-view (class args)
   (if (subtypep class 'simple-view)
       (apply #'make-instance class args)

@@ -15,6 +15,16 @@
 
 (defclass simple-view (view) ())
 
+;; print view
+
+(defgeneric view-source (print-view))
+
+(defclass print-view (simple-view)
+  ((source :initarg :source :accessor view-source :initform nil)))
+
+(defmethod view-source ((view print-view))
+  (eval (slot-value view 'source)))
+
 ;; scope view
 
 (defgeneric view-scope (view))
@@ -31,13 +41,7 @@
 
 ;; data view
 
-(defgeneric view-source (data-view))
-
-(defclass data-view (scope-view simple-view)
-  ((source :initarg :source :accessor view-source :initform nil)))
-
-(defmethod view-source ((view data-view))
-  (eval (slot-value view 'source)))
+(defclass data-view (scope-view print-view) ())
 
 ;; format view
 

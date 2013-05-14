@@ -21,6 +21,14 @@
 (define-parser comment
     "<!--:" (:non-greedy-repetition 0 nil :everything) ":-->")
 
+;; <?: printable-data /?>
+
+(define-parser print
+    "<?:" (:regex "\\s*")
+          (:register (:non-greedy-repetition 0 nil :everything))
+          (:regex "\\s*")
+          "/?>")
+
 ;; <? data :source printable-data /?>
 
 (define-parser simple

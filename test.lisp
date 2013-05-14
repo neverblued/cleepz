@@ -3,7 +3,7 @@
 ;; LLGPL -> http://opensource.franz.com/preamble.html
 
 (defpackage #:cleepz-test
-  (:use #:cl #:cl-blackjack #:cleepz))
+  (:use #:common-lisp #:blackjack #:cleepz))
 
 (in-package #:cleepz-test)
 
@@ -13,6 +13,7 @@
                                  (list :name "green" :rgb "#0f0")
                                  (list :name "blue"  :rgb "#00f")
                                  (list :name "skin"  :rgb "#face8D"))
-    (parse-view-file (join (system-directory '#:cleepz) "/test.html"))))
+    (let ((pathname (join (system-directory '#:cleepz) "/test.html")))
+      (parse-view-file pathname))))
 
 ;(run)
